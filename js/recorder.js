@@ -28,13 +28,15 @@ if (navigator.mediaDevices.getUserMedia) {
       };
 
       mediaRecorder.onstop = e => {
-        var blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
+        var blob = new Blob(chunks, { type: "audio/mp3" });
+        // var blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
         chunks = [];
         var audioURL = window.URL.createObjectURL(blob);
         player.src = audioURL;
 
+        // 上傳 added by CYouLiao 2023/06/24
         var fd = new FormData();
-        fd.append('audio_data', blob, 'test.ogg');
+        fd.append('audio_data', blob, 'test.mp3');
         $.ajax({
             type: 'post',
             url: 'audio_target_demo.php',
