@@ -137,11 +137,12 @@ if (navigator.mediaDevices.getUserMedia) {
 }
 
 // 上傳錄音
-function upload_record() {
+submit_button.onclick = function () {
     var fd = new FormData();
     fd.append('audio_data', blob, 'test.mp3');
     $.ajax({
         type: 'post',
+        dataType: 'json',
         url: 'audio_target_demo.php',
         data: fd,
         processData: false,
