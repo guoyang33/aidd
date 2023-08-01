@@ -24,6 +24,8 @@ $target_file = './sound_tmp/'.$tmp_name['filename'].'.'.$fname['extension'];
 // $target_file = './test2.ogg';
 move_uploaded_file($temp_file, $target_file);
 
+// exec("");
+
 // 清除暫存檔
 // unlink($temp_file);
 

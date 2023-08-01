@@ -17,6 +17,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/recorder_codepen-robert.css" rel="stylesheet" />
         <!-- JQuery Library -->
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     </head>
@@ -59,8 +60,15 @@
                     <div class="col-lg-8 text-center">
                         <h2 class="text-white mt-0">疑病行為自我測試</h2>
                         <div class=" app ">
-                            <audio id="demo" controls  class = " audio-player " ></audio >
-                                <p></p>
+                            <!-- <audio id="demo" controls  class = " audio-player " ></audio > -->
+                                <p class="record-time"></p>
+                                <p class="record-volume"></p>
+                                <div class="recorder_wrapper">
+                                    <div class="recorder">
+                                        <button class="record_btn record-btn" id="button"></button>
+                                        <p id="msg_box"></p>
+                                    </div>
+                                </div>
                                 <button class="btn btn-light record-btn ">Start</button >
                             <script  src = " ./js/recorder.js " ></script>
                         </div >
