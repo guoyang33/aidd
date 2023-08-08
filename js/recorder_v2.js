@@ -139,7 +139,7 @@ if (navigator.mediaDevices.getUserMedia) {
 // 上傳錄音
 submit_button.onclick = function () {
     var fd = new FormData();
-    fd.append('audio_data', blob, 'test.mp3');
+    fd.append('sound_record', blob, 'test.mp3');
     $.ajax({
         type: 'post',
         dataType: 'json',
