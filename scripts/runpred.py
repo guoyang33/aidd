@@ -8,7 +8,6 @@ import sys
 import torch
 import librosa
 from pathlib import Path
-from datetime import datetime
 import time
 
 ROOT_DIR = Path(__file__).parents[0]  # Python腳本根目錄
@@ -85,7 +84,7 @@ def main():
                     conn.commit()
                     cursor.close()
                     print('Done.')
-                    
+
                     # 刪除音檔
                     # os.remove(sound_file_path)
                     # print('File deleted.')
