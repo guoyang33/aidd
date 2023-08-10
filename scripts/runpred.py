@@ -40,10 +40,10 @@ def main():
     # 載入轉換函式
     transform = get_transform()
 
-    # 資料庫連線
-    conn = pymysql.Connection(host=MYSQL_LOGIN_INFO['host'], user=MYSQL_LOGIN_INFO['user'], password=MYSQL_LOGIN_INFO['password'], db=MYSQL_LOGIN_INFO['db'], charset='utf8')
 
     while True:
+        # 資料庫連線
+        conn = pymysql.Connection(host=MYSQL_LOGIN_INFO['host'], user=MYSQL_LOGIN_INFO['user'], password=MYSQL_LOGIN_INFO['password'], db=MYSQL_LOGIN_INFO['db'], charset='utf8')
         # 取得資料庫中尚未預測的資料
         print('Getting data from database...')
         cursor = conn.cursor(pymysql.cursors.DictCursor)
@@ -91,7 +91,7 @@ def main():
 
         print('Sleeping...')
         # 休息一段時間
-        time.sleep(10)
+        time.sleep(5)
 
 
 if __name__ == '__main__':

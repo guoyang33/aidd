@@ -22,6 +22,8 @@ var record_button = document.querySelector('.record-btn'),
     record_time_s,
     record_time_m,
     record_timer;
+var tr_id = null,
+    fetch_result_timer = null;
 
 if (navigator.mediaDevices === undefined) {
     navigator.mediaDevices = {};
@@ -83,7 +85,7 @@ if (navigator.mediaDevices.getUserMedia) {
                     record_time_s = Math.floor(record_time / 1000) % 60;
                     record_time_m = Math.floor(record_time / 60000) % 60;
                     // 顯示錄音時間
-                    record_msg_box.innerHTML = '正在錄音...<br>' + String(record_time_m).padStart(2, "0") + ":" + String(record_time_s).padStart(2, "0") + "." + String(record_time_ms).padStart(3, "0");
+                    record_msg_box.innerHTML = '錄音中...<br>' + String(record_time_m).padStart(2, "0") + ":" + String(record_time_s).padStart(2, "0") + "." + String(record_time_ms).padStart(3, "0") + "<br>再按一次即可停止錄音，或10秒後將自動停止錄音";
                     if (record_time > 10*1000) {
                         stop();
                         alert('錄音時間達10秒，已自動停止錄音，請按下方按鈕上傳錄音檔案');
@@ -138,6 +140,10 @@ if (navigator.mediaDevices.getUserMedia) {
 
 // 上傳錄音
 submit_button.onclick = function () {
+    record_button.disabled = true;
+    submit_button.disabled = true;
+    record_msg_box.textContent = '上傳中...';
+    record_msg_box.classList.remove('d-none');
     var fd = new FormData();
     fd.append('sound_record', blob, 'test.mp3');
     $.ajax({
@@ -148,6 +154,52 @@ submit_button.onclick = function () {
         processData: false,
         contentType: false
     }).done(function (data) {
-        console.log(data);
+        if (data.headers.status == 'OK') {
+            tr_id = data.contents.tr_id;
+            // scroll to predict-result
+            $('html, body').animate({
+                scrollTop: $("#predict-result").offset().top
+            }, 500);
+            // recover button
+            record_button.disabled = false;
+            submit_button.disabled = false;
+            // change msg
+            record_msg_box.textContent = '上傳成功';
+            record_msg_box.classList.remove('d-none');
+            // fetch predict result
+            fetch_result_timer = setInterval(function () {
+                fetch_predict_result(tr_id);
+            }, 1000);
+            $('.predict-result-container').toggleClass('d-none');
+        } else {
+            record_msg_box.textContent = data.headers.error_msg + '<br>請聯絡系統管理員';
+            record_msg_box.classList.remove('d-none');
+        }
     })
+}
+
+// fetch predict result
+function fetch_predict_result(tr_id) {
+    // AJAX
+    $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: 'get_predict_result.php',
+        data: {
+            'tr_id': tr_id
+        }
+    }).done(function (data) {
+        if (data.headers.status == 'OK') {
+            // change predict-result
+            if (data.contents.predict_finish) {
+                stop_fetch_result_timer();
+                $('.predict-result-msg').text(data.contents.predict_result);
+            }
+        }
+    });
+}
+
+// stop fetch timer
+function stop_fetch_result_timer() {
+    clearInterval(fetch_result_timer);
 }
