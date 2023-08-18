@@ -37,7 +37,7 @@ html {
     max-width: 100%;
 }
 
-.record_btn {
+.record-btn {
     width: 100px;
     height: 100px;
     font-family: 'Material Icons';
@@ -50,34 +50,34 @@ html {
     transition: 0.15s linear;
 }
 
-.record_btn:hover {
+.record-btn:hover {
     transition: 0.15s linear;
     transform: scale( 1.05 );
 }
 
-.record_btn:active {
+.record-btn:active {
     background: #f5f5f5;
 }
 
-.record_btn:after {
+.record-btn:after {
     content: '\E029';
 }
 
-.record_btn[disabled] {
+.record-btn[disabled] {
     border: 2px solid #ccc;
 }
 
-.record_btn[disabled]:after {
+.record-btn[disabled]:after {
     content: '\E02B';
     color: #ccc;
 }
 
-.record_btn[disabled]:hover {
+.record-btn[disabled]:hover {
     transition: 0.15s linear;
     transform: none;
 }
 
-.record_btn[disabled]:active {
+.record-btn[disabled]:active {
     background: none;
 }
 

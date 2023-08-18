@@ -18,6 +18,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
+        <!-- Recorder CSS -->
+        <link href="css/recorder_codepen-robert.css" rel="stylesheet" />
+        <!-- JQuery Library (AJAX requirement)-->
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -52,27 +56,48 @@
             </div>
         </div>
     </header>
-    <!-- About-->
+    <!-- detection-->
     <section class="page-section bg-primary" id="detection">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <h2 class="text-white mt-0">疑病行為自我測試</h2>
-                    <div class=" app ">
-
-                        <audio controls class=" audio-player "></audio >
-                                <p></p>
-                                <button class="btn btn-light record-btn ">Start</button >
-                            <script  src = " ./js/recorder.js " ></script>
-                        </div >
-                        <hr class="divider divider-light" />
-                        <p class="text-white-125 h3">按下Start後，請根據您的說話方式唸出這段句子 :</p>
-                        <p class="text-bule-125 h3">小狗在草地上奔跑，追著一只蝴蝶，看起來非常開心。牠們的尾巴不停地搖晃，好像在告訴我們牠們的快樂。</p>
-                        <a class="btn btn-light btn-xl" href="#services">Get Started!</a>
+                    <h2 class="text-white mt-0">AI診斷失智症</h2>
+                    <div class="app">
+                        <span class="text-white h3">為完成AI預測，我們需要錄製您說話的聲音，請根據您的說話方式唸出這段句子，並且時間務必要超過5秒。</span>
+                        <p class="text-white-90 h4 my-3">小狗在草地上奔跑，追著一只蝴蝶，看起來非常開心。牠們的尾巴不停地搖晃，好像在告訴我們牠們的快樂。</p>
+                        <div class="recorder_wrapper">
+                            <div class="recorder">
+                                <button class="record-btn" id="button"></button>
+                                <p class="record-msg text-white h5 mt-2"></p>
+                                <!-- <p id="msg_box">aaa</p> -->
+                            </div>
+                        </div>
+                        <audio class="record-player d-none" controls></audio>
+                        <br>
+                        <button class="submit-btn btn btn-light d-none">送出</button>
+                        <!-- <button class="btn btn-light record-btn ">Start</button > -->
+                        <script src=" ./js/recorder_v2.js "></script>
+                        <!-- <script src=" ./js/recorder.js "></script> -->
                     </div>
+                    <!-- <a class="btn btn-light btn-xl" href="#services">Get Started!</a> -->
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+    <!-- 顯示結果-->
+    <section class="page-section bg-primary" id="predict-result">
+        <div class="predict-result-container container px-4 px-lg-5 d-none">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="text-white mt-0">AI預測結果</h2>
+                    <div class="app">
+                        <span class="predict-result-msg text-white h4">分析中...</span>
+                    </div>
+                    <!-- <a class="btn btn-light btn-xl" href="#services">Get Started!</a> -->
+                </div>
+            </div>
+        </div>
+    </section>
         <!-- Services-->
         <section class="page-section" id="services">
                 <h2 class="text-center mt-0">失智症種類</h2>
@@ -152,43 +177,43 @@
                 <div class=" text-center fw-bold">
                     <h1 class="mt-2 list-group-item-primary bg-warning text-dark rounded-pill">失智症十大警訊 (依據真實情況勾選)</h1>
                     <div class="list-group">
-                        <label class="list-group-item list-group-item-secondary rounded-pill">
+                        <label class="list-group-item list-group-item-secondary rounded-pill sympton-list-item mt-1 mx-2">
                           <input class="form-check-input me-1" type="checkbox" value="1" data-score="10">
                           記憶力變差，影響日常生活起居。
                         </label>
-                        <label class="list-group-item list-group-item-secondary rounded-pill">
+                        <label class="list-group-item list-group-item-secondary rounded-pill sympton-list-item mt-1 mx-2">
                           <input class="form-check-input me-1" type="checkbox" value="1" data-score="10">
                           以前可以做好的事情，現在做不好。
                         </label>
-                        <label class="list-group-item list-group-item-secondary rounded-pill">
+                        <label class="list-group-item list-group-item-secondary rounded-pill sympton-list-item mt-1 mx-2">
                           <input class="form-check-input me-1" type="checkbox" value="1" data-score="10">
                           搞不清楚過去、現在與未來，沒有時間與空間概念。
                         </label>
-                        <label class="list-group-item list-group-item-secondary rounded-pill">
+                        <label class="list-group-item list-group-item-secondary rounded-pill sympton-list-item mt-1 mx-2">
                           <input class="form-check-input me-1" type="checkbox" value="1" data-score="10">
                           情緒起伏很大，容易生氣，有時會攻擊別人。
                         </label>
-                        <label class="list-group-item list-group-item-secondary rounded-pill">
+                        <label class="list-group-item list-group-item-secondary rounded-pill sympton-list-item mt-1 mx-2">
                           <input class="form-check-input me-1" type="checkbox" value="1" data-score="10">
                           沒辦法用語言表達自己的想法與意見，理解力變差。
                         </label>
-                        <label class="list-group-item list-group-item-secondary rounded-pill">
+                        <label class="list-group-item list-group-item-secondary rounded-pill sympton-list-item mt-1 mx-2">
                           <input class="form-check-input me-1" type="checkbox" value="1" data-score="10">
                           判斷力變弱，警覺性變差。
                         </label>
-                        <label class="list-group-item list-group-item-secondary rounded-pill">
+                        <label class="list-group-item list-group-item-secondary rounded-pill sympton-list-item mt-1 mx-2">
                           <input class="form-check-input me-1" type="checkbox" value="1" data-score="10">
                           缺乏抽象思考能力，例如不知道鑰匙可以用來開門，不知道筆可以用來寫字。
                         </label>
-                        <label class="list-group-item list-group-item-secondary rounded-pill">
+                        <label class="list-group-item list-group-item-secondary rounded-pill sympton-list-item mt-1 mx-2">
                           <input class="form-check-input me-1" type="checkbox" value="1" data-score="10">
                           像換了個人似的，性情大變。
                         </label>
-                        <label class="list-group-item list-group-item-secondary rounded-pill">
+                        <label class="list-group-item list-group-item-secondary rounded-pill sympton-list-item mt-1 mx-2">
                           <input class="form-check-input me-1" type="checkbox" value="1" data-score="10">
                           行為產生極大改變，短時間內情緒變化大，可能沒有理由的從平靜的心情變成傷心。
                         </label>
-                        <label class="list-group-item list-group-item-secondary rounded-pill">
+                        <label class="list-group-item list-group-item-secondary rounded-pill sympton-list-item mt-1 mx-2">
                           <input class="form-check-input me-1" type="checkbox" value="1" data-score="10">
                           會偷偷藏東西，又忘記東西放在哪裡，甚至以為別人偷藏他的東西。
                         </label>
@@ -197,11 +222,11 @@
                       <div class=" text-center fw-bold">
                         <h1 class="mt-2 list-group-item-info bg-info text-dark rounded-pill">失智症三階段</h1>
                         <div class="list-group">
-                            <label class="list-group-item list-group-item-dark">
+                            <label class="list-group-item list-group-item-dark mt-1">
                               <input class="form-check-input me-1 rounded-pill" type="checkbox" value="">
                               <h4>早期症狀：</h4>健忘（尤其最近發生的事）、缺乏創造力、進取心，並喪失對原有事物的興趣與工作衝勁。
                             </label>
-                            <label class="list-group-item list-group-item-dark">
+                            <label class="list-group-item list-group-item-dark mt-1">
                               <input class="form-check-input me-1 rounded-pill" type="checkbox" value="">
                               <h4>中期症狀：</h4>對於人、事、地、物，漸漸無定向感，注意力易轉移，且一般性理解力減低。<br>
                               此外，會重覆相同的語言、行為及思想，而情緒不穩，缺乏原有之道德與倫理的標準，常有迫害妄想的人格異常等現象，
@@ -209,7 +234,7 @@
                               「黃昏症候群」:在傍晚或夜晚來臨前，患者出現行為或意識上的混亂，或是原有的精神行為症狀變得更嚴重，
                               包括躁動、踱步、攻擊、不安、焦慮、沮喪、遊走、注意力不集中、尖叫、幻覺等症狀。。
                             </label>
-                            <label class="list-group-item list-group-item-dark">
+                            <label class="list-group-item list-group-item-dark mt-1">
                               <input class="form-check-input me-1 rounded-pill" type="checkbox" value="">
                               <h4>晚期症狀：</h4>語無倫次、不可理喻、喪失所有智力功能、明顯的智能退化。<br>
                               而且逐漸不言不語、表情冷漠、肌肉僵硬、憔悴不堪，以及出現大小便失禁、容易感染等。
@@ -238,7 +263,8 @@
                         <!-- To make this form functional, sign up at-->
                         <!-- https://startbootstrap.com/solution/contact-forms-->
                         <!-- to get an API token!-->
-                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                        <form id="contactForm">
+                        <!-- <form id="contactForm" data-sb-form-api-token="API_TOKEN"> -->
                             <!-- Name input-->
                             <div class="form-floating mb-3">
                                 <class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
@@ -299,7 +325,7 @@
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <!-- <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
         <script>
             // 獲取所有帶有 data-score 屬性的勾選框
             const checkboxes = document.querySelectorAll('input[data-score]');
